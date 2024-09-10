@@ -4,6 +4,7 @@ import {ClerkProvider} from "@clerk/nextjs";
 import "./globals.css";
 import ToastProvider from "@/components/provider/provider-toast";
 import React from "react";
+import {ConfettiProvider} from "@/components/provider/confetti-provider";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <ClerkProvider afterSignOutUrl={'/'}>
         <html lang="en">
         <body className={inter.className}>
+        <ConfettiProvider/>
         <ToastProvider/>
         {children}
         </body>

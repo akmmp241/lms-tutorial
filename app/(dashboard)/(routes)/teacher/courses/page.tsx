@@ -19,8 +19,6 @@ const CoursesPage = async () => {
     }
   })
 
-  console.info(courses)
-
   return (
       <div className={"p-6"}>
         <DataTable columns={columns} data={courses} />

@@ -1,43 +1,31 @@
 import {headers} from "next/headers";
-import Stripe from "stripe";
-import {stripe} from "@/lib/stripe";
 import {NextResponse} from "next/server";
 import {db} from "@/lib/db";
 
 export async function POST(req: Request) {
-  const body = await req.text()
-  const signature = headers().get("Stripe-Signature") as string
+  const callback = await req.json()
+  const signature = headers().get("x-callback-token") as string
 
-  let event: Stripe.Event
+  if (signature !== process.env.XENDIT_CALLBACK_TOKEN)
+    return new NextResponse(`Unauthorized`, {status: 401})
 
-  try {
-    event = stripe.webhooks.constructEvent(
-        body,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET!
-    )
-  } catch (err: any) {
-    return new NextResponse(`Webhook Error: ${err.message}`, {status: 400})
+  const userId = callback.external_id.split("@")[1]
+  const courseId = callback.external_id.split("@")[2]
+
+  if (callback.status === "PAID") {
+    if (!userId || !courseId) {
+      return new NextResponse(`Webhook Error: Missing metadata`, {status: 400})
+    }
+
+    await db.purchase.create({
+      data: {
+        courseId: courseId,
+        userId: userId
+      }
+    })
+  } else {
+    return new NextResponse(`Webhook Error: Unhandled event type`, {status: 200})
   }
 
-  const session = event.data.object as Stripe.Checkout.Session
-  const userId = session?.metadata?.userId
-  const courseId =session?.metadata?.courseId
-
-   if (event.type === "checkout.session.completed") {
-     if (!userId || !courseId) {
-       return new NextResponse(`Webhook Error: Missing metadata`, {status: 400})
-     }
-
-     await db.purchase.create({
-       data: {
-         courseId: courseId,
-         userId: userId
-       }
-     })
-   } else {
-     return new NextResponse(`Webhook Error: Unhandled event type ${event.type}`, {status: 200})
-   }
-
-   return new NextResponse(null, {status:200})
+  return new NextResponse(null, {status: 200})
 }

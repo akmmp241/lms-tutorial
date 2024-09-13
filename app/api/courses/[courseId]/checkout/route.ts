@@ -1,8 +1,8 @@
 import {NextResponse} from "next/server";
 import {currentUser} from "@clerk/nextjs/server";
 import {db} from "@/lib/db";
-import Stripe from "stripe";
-import {stripe} from "@/lib/stripe";
+import {randomUUID} from "node:crypto";
+import {Customer, Invoice} from "@/lib/xendit";
 
 export async function POST(
     req: Request,
@@ -19,8 +19,13 @@ export async function POST(
       where: {
         id: params.courseId,
         isPublished: true,
+      },
+      include: {
+        category: true
       }
     })
+
+    if (!course) return new NextResponse("Not Found", {status: 404})
 
     const purchase = await db.purchase.findUnique({
       where: {
@@ -33,22 +38,6 @@ export async function POST(
 
     if (purchase) return new NextResponse("Already purchased", {status: 400})
 
-    if (!course) return new NextResponse("Not Found", {status: 404})
-
-    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
-      {
-        quantity: 1,
-        price_data: {
-          currency: "IDR",
-          product_data: {
-            name: course.title,
-            description: course.description!
-          },
-          unit_amount: Math.round(course.price! * 100)
-        }
-      }
-    ]
-
     let stripeCustomer = await db.stripeCustomer.findUnique({
       where: {
         userId: user.id
@@ -59,11 +48,18 @@ export async function POST(
     })
 
     if (!stripeCustomer) {
-      const customer = await stripe.customers.create({
-        email: user.emailAddresses[0].emailAddress
+      const customer = await Customer.createCustomer({
+        data: {
+          referenceId: user.id,
+          type: "INDIVIDUAL",
+          individualDetail: {
+            givenNames: user.fullName!
+          },
+          email: user.emailAddresses[0].emailAddress,
+        }
       })
 
-      stripeCustomer = await db.stripeCustomer.create({
+      await db.stripeCustomer.create({
         data: {
           userId: user.id,
           stripeCustomerId: customer.id,
@@ -71,19 +67,26 @@ export async function POST(
       })
     }
 
-    const session = await stripe.checkout.sessions.create({
-      customer: stripeCustomer.stripeCustomerId,
-      line_items: line_items,
-      mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?cancel=1`,
-      metadata: {
-        courseId: course.id,
-        userId: user.id,
+    const invoice = await Invoice.createInvoice({
+      data: {
+        externalId: `${randomUUID()}@${user.id}@${params.courseId}`,
+        amount: course.price!,
+        successRedirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${params.courseId}`,
+        failureRedirectUrl: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${params.courseId}`,
+        currency: "IDR",
+        items: [
+          {
+            name: course.title,
+            quantity: 1,
+            price: course.price!,
+            category: course.category?.name!,
+            url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${params.courseId}`,
+          }
+        ],
       }
     })
 
-    return NextResponse.json({url: session.url})
+    return NextResponse.json({url: invoice.invoiceUrl})
   } catch (err) {
     console.error("[COURSE_ID_CHECKOUT]", err);
     return new NextResponse("Internal Server Error", {status: 500})

@@ -17,7 +17,7 @@ interface CourseSidebarProps {
 export const CourseSidebar = async ({course, progressCount}: CourseSidebarProps) => {
   const {userId} = auth()
 
-  if (!userId) redirect("/")
+  if (!userId) redirect("/home")
 
   const purchase = await db.purchase.findUnique({
     where: {

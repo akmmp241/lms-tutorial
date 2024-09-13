@@ -9,7 +9,7 @@ import {CourseNavbar} from "@/app/(course)/courses/[courseId]/_components/course
 const CourseLayout = async ({children, params}: { children: React.ReactNode, params: { courseId: string } }) => {
   const {userId} = auth()
 
-  if (!userId) redirect("/")
+  if (!userId) redirect("/home")
 
   const course = await db.course.findUnique({
     where: {
@@ -34,7 +34,7 @@ const CourseLayout = async ({children, params}: { children: React.ReactNode, par
     }
   })
 
-  if (!course) redirect("/")
+  if (!course) redirect("/home")
 
   const progressCount = await getProgress(userId, course.id)
 

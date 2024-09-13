@@ -35,7 +35,7 @@ export const CourseProgressButton = ({
 
       if (!isCompleted && !nextChapterId) confetti.onOpen()
 
-      if (!isCompleted && nextChapterId) router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+      if (!isCompleted && nextChapterId) router.push(`/home/courses/${courseId}/chapters/${nextChapterId}`)
 
       toast.success("Progress updated")
       router.refresh()

@@ -3,13 +3,13 @@ import {redirect} from "next/navigation";
 import {getDashboardCourses} from "@/actions/get-dashboard-courses";
 import {CoursesList} from "@/components/courses-list";
 import {Clock} from "lucide-react";
-import {InfoCard} from "@/app/(dashboard)/(routes)/(root)/_components/info-card";
+import {InfoCard} from "@/app/(dashboard)/home/(routes)/(root)/_components/info-card";
 
 export default async function Dashboard() {
 
   const {userId} = auth()
 
-  if (!userId) redirect("/ ")
+  if (!userId) redirect("/home")
 
   const {
     completedCourses,

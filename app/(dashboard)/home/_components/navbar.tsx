@@ -1,5 +1,5 @@
 import React from 'react';
-import MobileSidebar from "@/app/(dashboard)/_components/mobile-sidebar";
+import MobileSidebar from "@/app/(dashboard)/home/_components/mobile-sidebar";
 import NavbarRoutes from "@/components/navbar-routes";
 
 const Navbar = () => {

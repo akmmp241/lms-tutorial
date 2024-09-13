@@ -6,15 +6,15 @@ import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
 import {IconBadge} from "@/components/icon-badge";
 import {CircleDollarSign, LayoutDashboard, ListCheck, File} from "lucide-react";
-import {TitleForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/title-form";
-import {DescriptionForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/description-form";
-import {ImageForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/image-form";
-import {CategoryForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/category-form";
-import {PriceForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/price-form";
-import {ChapterForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/chapter-form";
-import {AttachmentForm} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/attachment-form";
+import {TitleForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/title-form";
+import {DescriptionForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/description-form";
+import {ImageForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/image-form";
+import {CategoryForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/category-form";
+import {PriceForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/price-form";
+import {ChapterForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/chapter-form";
+import {AttachmentForm} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/attachment-form";
 import {Banner} from "@/components/banner";
-import {CourseActions} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/course-action";
+import {CourseActions} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/course-action";
 
 const CourseIdPage = async ({params}: {
   params: {
@@ -23,7 +23,7 @@ const CourseIdPage = async ({params}: {
 }) => {
   const {userId} = auth()
 
-  if (!userId) return redirect("/")
+  if (!userId) return redirect("/home")
 
   const course = await db.course.findUnique({
     where: {
@@ -50,7 +50,7 @@ const CourseIdPage = async ({params}: {
     }
   })
 
-  if (!course) return redirect("/")
+  if (!course) return redirect("/home")
 
   const requiredFields = [
     course.title,

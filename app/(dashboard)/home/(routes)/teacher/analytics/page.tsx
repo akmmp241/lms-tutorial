@@ -2,13 +2,13 @@ import React from 'react';
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
 import {getAnalytics} from "@/actions/get-analytics";
-import {DataCard} from "@/app/(dashboard)/(routes)/teacher/analytics/_components/data-card";
-import {Chart} from "@/app/(dashboard)/(routes)/teacher/analytics/_components/chart";
+import {DataCard} from "@/app/(dashboard)/home/(routes)/teacher/analytics/_components/data-card";
+import {Chart} from "@/app/(dashboard)/home/(routes)/teacher/analytics/_components/chart";
 
 const AnalyticsPage = async () => {
   const {userId} = auth()
 
-  if (!userId) return redirect("/")
+  if (!userId) return redirect("/home")
 
   const {
     data,

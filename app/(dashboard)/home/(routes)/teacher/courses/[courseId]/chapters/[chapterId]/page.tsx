@@ -6,20 +6,20 @@ import {db} from "@/lib/db";
 import {IconBadge} from "@/components/icon-badge";
 import {
   ChapterTitleForm
-} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
+} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-title-form";
 import {
   ChapterDescriptionForm
-} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
+} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-description-form";
 import {
   ChapterAccessForm
-} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-access-form";
+} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-access-form";
 import {
   ChapterVideoForm
-} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-video-form";
+} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-video-form";
 import {Banner} from "@/components/banner";
 import {
   ChapterActions
-} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-actions";
+} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/chapters/[chapterId]/_components/chapter-actions";
 
 const ChapterIdPage = async (
     {params}: {
@@ -32,7 +32,7 @@ const ChapterIdPage = async (
 
   const {userId} = auth()
 
-  if (!userId) redirect("/")
+  if (!userId) redirect("/home")
 
   const chapter = await db.chapter.findUnique({
     where: {
@@ -44,7 +44,7 @@ const ChapterIdPage = async (
     }
   })
 
-  if (!chapter) redirect("/")
+  if (!chapter) redirect("/home")
 
   const requiredFields = [
     chapter.title,

@@ -18,7 +18,7 @@ import {
 const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: string } }) => {
   const {userId} = auth()
 
-  if (!userId) redirect(("/"))
+  if (!userId) redirect(("/home"))
 
   const data = await getChapter({
     userId: userId,
@@ -26,7 +26,7 @@ const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: 
     courseId: params.courseId,
   })
 
-  if (!data?.chapter || !data.course) redirect("/")
+  if (!data?.chapter || !data.course) redirect("/home")
 
   const isLocked = !data.chapter.isFree && !data.purchase
   const completeOnEnd = !!data.purchase && !data.userProgress?.isCompleted

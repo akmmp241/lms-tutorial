@@ -11,7 +11,7 @@ import {
   FcSalesPerformance,
   FcSportsMode
 } from "react-icons/fc";
-import {CategoryItem} from "@/app/(dashboard)/(routes)/search/_components/cateogry-item";
+import {CategoryItem} from "@/app/(dashboard)/home/(routes)/search/_components/cateogry-item";
 
 interface CategoriesProps {
   items: Category[]

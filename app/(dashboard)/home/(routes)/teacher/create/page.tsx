@@ -74,7 +74,7 @@ const Create = () => {
                 </FormItem>
               )}/>
               <div className={"flex items-center gap-x-2"}>
-                <Link href="/">
+                <Link href="/public">
                   <Button type={"button"} variant={"ghost"}>
                     Cancel
                   </Button>

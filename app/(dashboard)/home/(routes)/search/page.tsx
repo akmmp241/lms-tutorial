@@ -1,6 +1,6 @@
 import React from 'react';
 import {db} from "@/lib/db";
-import {Categories} from "@/app/(dashboard)/(routes)/search/_components/categories";
+import {Categories} from "@/app/(dashboard)/home/(routes)/search/_components/categories";
 import {SearchInput} from "@/components/search-input";
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
@@ -17,7 +17,7 @@ interface SearchPageProps {
 const SearchPage = async ({searchParams}: SearchPageProps) => {
   const {userId} = auth()
 
-  if (!userId) redirect('/')
+  if (!userId) redirect('/home')
 
   const categories = await db.category.findMany({
     orderBy: {
@@ -29,8 +29,6 @@ const SearchPage = async ({searchParams}: SearchPageProps) => {
     userId,
     ...searchParams
   })
-
-  console.info(courses)
 
   return (
       <>

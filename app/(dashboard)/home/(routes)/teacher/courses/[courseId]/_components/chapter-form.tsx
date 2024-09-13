@@ -13,7 +13,7 @@ import {useRouter} from "next/navigation";
 import toast from "react-hot-toast";
 import {cn} from "@/lib/utils";
 import {Chapter, Course} from "@prisma/client";
-import {ChapterList} from "@/app/(dashboard)/(routes)/teacher/courses/[courseId]/_components/chapter-list";
+import {ChapterList} from "@/app/(dashboard)/home/(routes)/teacher/courses/[courseId]/_components/chapter-list";
 
 interface ChapterFormPros {
   initialData: Course & { chapters: Chapter[] }

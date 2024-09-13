@@ -26,6 +26,8 @@ export const ImageForm = ({initialData, courseId}: ImageFormPros) => {
   const router = useRouter()
   const [isEditing, setIsEditing] = useState<boolean>(false)
 
+  console.info(initialData.imageUrl)
+
   const toggleEdit = () => setIsEditing(current => !current)
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {

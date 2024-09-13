@@ -35,7 +35,6 @@ export const AttachmentForm = ({initialData, courseId}: AttachmentFormPros) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.info(values)
     try {
       await axios.post(`/api/courses/${courseId}/attachments`, values)
       toast.success("Course Updated")
@@ -121,9 +120,7 @@ export const AttachmentForm = ({initialData, courseId}: AttachmentFormPros) => {
               <FileUpload
                   endpoint="courseAttachment"
                   onChange={(url) => {
-                    if (url) {
-                      onSubmit({url: url})
-                    }
+                    if (url) return onSubmit({url: url})
                   }}
               />
               <div className={"text-xs text-muted-foreground mt-4"}>

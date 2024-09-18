@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
       <ClerkProvider afterSignOutUrl={'/'}>
-        <html lang="en">
+        <html lang="en" className={"scroll-smooth"}>
         <body className={inter.className}>
         <ConfettiProvider/>
         <ToastProvider/>

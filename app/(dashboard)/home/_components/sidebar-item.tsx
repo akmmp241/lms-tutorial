@@ -8,16 +8,19 @@ interface SidebarItemProps {
   icon: LucideIcon
   label: string
   href: string
+  isTeacher: boolean
 }
 
-export const SidebarItem = ({icon: Icon, label, href}: SidebarItemProps) => {
+export const SidebarItem = ({icon: Icon, label, href, isTeacher}: SidebarItemProps) => {
   const pathName = usePathname()
   const router = useRouter()
 
+  let ref = href.split('/')
+  ref.shift()
+
   const isActive =
-      (pathName === "/home" && href === "/home") ||
       pathName === href ||
-      pathName?.startsWith(`${href}/`)
+      pathName?.includes(ref[isTeacher ? 2 : 1] + '/')
 
   const handleClick = () => {
     router.push(href)

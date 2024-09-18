@@ -50,20 +50,6 @@ export function DataTable<TData, TValue>(
   return (
       <div>
         <div className="flex items-center py-4 justify-between">
-          {/*<Select*/}
-          {/*    onValueChange={(value) => {*/}
-          {/*      // table.getColumn("isPublished")?.setFilterValue(value)*/}
-          {/*    }}*/}
-          {/*    value={(table.getColumn("isPublished")?.getFilterValue() as string) ?? ""}*/}
-          {/*>*/}
-          {/*  <SelectTrigger className="w-[180px]">*/}
-          {/*    <SelectValue placeholder="Status"/>*/}
-          {/*  </SelectTrigger>*/}
-          {/*  <SelectContent>*/}
-          {/*    <SelectItem value="Published">Published</SelectItem>*/}
-          {/*    <SelectItem value="Unpublished">Unpublished</SelectItem>*/}
-          {/*  </SelectContent>*/}
-          {/*</Select>*/}
           <Input
               placeholder="Filter titles..."
               value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -72,7 +58,7 @@ export function DataTable<TData, TValue>(
               }
               className="max-w-sm"
           />
-          <Link href={"/teacher/create"}>
+          <Link href={"/home/teacher/create"}>
             <Button>
               <PlusCircle className={"h-4 w-4 mr-2"} />
               New Course

@@ -49,7 +49,7 @@ export const CourseActions = ({disabled, courseId, isPublished}: CourseActionsPr
       await axios.delete(`/api/courses/${courseId}`)
 
       toast.success("Course deleted")
-      router.push(`/teacher/courses`)
+      router.push(`/home/teacher/courses`)
       router.refresh()
     } catch {
       toast.error("Something went wrong")

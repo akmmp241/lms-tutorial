@@ -45,6 +45,7 @@ export const SidebarRoutes = () => {
                 icon={route.icon}
                 label={route.label}
                 href={route.href}
+                isTeacher={isTeacherPage}
             />
         ))}
       </div>

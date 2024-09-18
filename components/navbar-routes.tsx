@@ -7,7 +7,6 @@ import {Button} from "@/components/ui/button";
 import {LogOut} from "lucide-react";
 import Link from "next/link";
 import {SearchInput} from "@/components/search-input";
-import {auth} from "@clerk/nextjs/server";
 import {isTeacher} from "@/lib/teacher";
 
 const NavbarRoutes = () => {

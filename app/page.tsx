@@ -6,7 +6,7 @@ import Particles from "@/components/magicui/particles";
 import WordRotate from "@/components/magicui/word-rotate";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import Link from "next/link";
-import {Logo} from "@/app/(dashboard)/home/_components/logo";
+import {Logo} from "@/app/(old)/home/_components/logo";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import DotPattern from "@/components/magicui/dot-pattern";

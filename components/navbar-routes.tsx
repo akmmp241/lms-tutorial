@@ -4,7 +4,7 @@ import React from 'react';
 import {useAuth, UserButton} from "@clerk/nextjs";
 import {usePathname} from "next/navigation";
 import {Button} from "@/components/ui/button";
-import {LogOut} from "lucide-react";
+import {ArrowRight, LogOut} from "lucide-react";
 import Link from "next/link";
 import {SearchInput} from "@/components/search-input";
 import {isTeacher} from "@/lib/teacher";
@@ -24,17 +24,17 @@ const NavbarRoutes = () => {
               <SearchInput />
             </div>
         )}
-        <div className={"flex gap-x-2 ml-auto"}>
+        <div className={"flex items-center gap-x-4 ml-auto"}>
           {isTeacherPage || isCoursePage ? (
               <Link href={"/home"}>
-                <Button size={"sm"} variant={"ghost"}>
+                <Button size={"sm"} variant={"default"}>
                   <LogOut className={"h-4 w-4 mr-2"}/>
                   Exit
                 </Button>
               </Link>
           ) : isTeacher(userId) ? (
-              <Link href={"/home/teacher/courses"}>
-                <Button size={"sm"} variant={"ghost"}>
+              <Link href={"/dashboard//teacher/courses"}>
+                <Button className={"flex items-center"} size={"sm"} variant={"default"}>
                   Teacher Mode
                 </Button>
               </Link>

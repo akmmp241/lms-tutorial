@@ -69,7 +69,7 @@ export const ChapterForm = ({initialData, courseId}: ChapterFormPros) => {
   }
 
   const onEdit = (id: string) => {
-    router.push(`/teacher/courses/${courseId}/chapters/${id}`)
+    router.push(`/home/teacher/courses/${courseId}/chapters/${id}`)
   }
 
   return (

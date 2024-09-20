@@ -91,7 +91,7 @@ const Page = () => {
           <div className={"flex flex-col gap-y-8"}>
             <SparklesText
                 text={"Akmp Academy"}
-                className={"pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-indigo-800 to-indigo-500/80 text-8xl bg-clip-text leading-none text-transparent dark:from-white dark:to-slate-900/10"}/>
+                className={"pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-indigo-800 to-indigo-500/80 text-8xl bg-clip-text leading-none text-transparent"}/>
             <WordRotate
                 className="text-center text-4xl font-[600] tracking-tighter text-gray-800"
                 duration={4000}

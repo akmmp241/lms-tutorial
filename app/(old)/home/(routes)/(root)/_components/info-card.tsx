@@ -18,7 +18,7 @@ export const InfoCard = ({
       <div className={"border rounded-md flex items-center gap-x-x2 p-3"}>
         <IconBadge
             variant={variant}
-            icon={Icon} className={""}/>
+            icon={Icon}/>
         <div>
           <p className={"font-medium"}>
             {label}

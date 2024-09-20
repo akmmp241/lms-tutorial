@@ -99,7 +99,7 @@ const ChapterIdPage = async (
             <div className={"space-y-4"}>
               <div>
                 <div className="flex items-center gap-x-2">
-                  <IconBadge icon={LayoutDashboard}/>
+                  <IconBadge icon={LayoutDashboard} className={""}/>
                   <h2 className={"text-xl"}>
                     Customize your chapter
                   </h2>
@@ -115,7 +115,7 @@ const ChapterIdPage = async (
               </div>
               <div>
                 <div className={"flex items-center gap-x-2"}>
-                  <IconBadge icon={Eye}/>
+                  <IconBadge icon={Eye} className={""}/>
                   <h2 className={"text-xl"}>
                     Access Setting
                   </h2>
@@ -128,7 +128,7 @@ const ChapterIdPage = async (
             </div>
             <div>
               <div className={"flex items-center gap-x-2"}>
-                <IconBadge icon={Video}/>
+                <IconBadge icon={Video} className={""}/>
                 <h2 className={"text-xl"}>Add a video</h2>
               </div>
               <ChapterVideoForm

@@ -92,7 +92,7 @@ const CourseIdPage = async ({params}: {
           <div className={"grid grid-cols-1 md:grid-cols-2 gap-6 mt-16"}>
             <div>
               <div className={"flex items-center gap-x-2"}>
-                <IconBadge icon={LayoutDashboard}/>
+                <IconBadge icon={LayoutDashboard} className={""}/>
                 <h2 className={"text-xl"}>Customize your course</h2>
               </div>
               <TitleForm
@@ -115,7 +115,7 @@ const CourseIdPage = async ({params}: {
             <div className={"space-y-6"}>
               <div>
                 <div className={"flex items-center gap-x-2"}>
-                  <IconBadge icon={ListCheck}/>
+                  <IconBadge icon={ListCheck} className={""}/>
                   <h2 className={"text-xl"}>Course Chapters</h2>
                 </div>
                 <div>
@@ -126,7 +126,7 @@ const CourseIdPage = async ({params}: {
               </div>
               <div>
                 <div className={"flex items-center gap-x-2"}>
-                  <IconBadge icon={CircleDollarSign}/>
+                  <IconBadge icon={CircleDollarSign} className={""}/>
                   <h2 className={"text-xl"}>Sell your course</h2>
                 </div>
                 <PriceForm
@@ -135,7 +135,7 @@ const CourseIdPage = async ({params}: {
               </div>
               <div>
                 <div className={"flex items-center gap-x-2"}>
-                  <IconBadge icon={File}/>
+                  <IconBadge icon={File} className={""}/>
                   <h2 className={"text-xl"}>Resources & Attachments</h2>
                 </div>
                 <AttachmentForm

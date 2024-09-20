@@ -14,7 +14,7 @@ interface CourseCardProps {
   chaptersLength: number
   price: number
   progress: number
-  category: string
+  description: string
 }
 
 export const CourseCard = (
@@ -25,11 +25,10 @@ export const CourseCard = (
       chaptersLength,
       price,
       progress,
-      category
+      description
     }: CourseCardProps) => {
   return (
-      <Link href={`/courses/${id}`}>
-        <div className={"group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 h-full"}>
+        <div className={"group hover:shadow-sm transition overflow-hidden border bg-neutral-200/40 rounded-lg h-full p-3"}>
           <div className={"relative w-full aspect-video rounded-md overflow-hidden"}>
             <Image
                 fill
@@ -38,15 +37,15 @@ export const CourseCard = (
                 alt={title}/>
           </div>
           <div className={"flex flex-col pt-2"}>
-            <div className={"text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2"}>
-              {title}
+            <div className={""}>
+              <span className={"text-lg md:text-xl font-bold line-clamp-2"}>{title}</span>
+              <p className={"text-neutral-500 text-base truncate w-2/3"}>
+                {description}
+              </p>
             </div>
-            <p className={"text-xs text-muted-foreground"}>
-              {category}
-            </p>
             <div className={"my-3 flex items-center gap-x-2 text-sm md:text-xs"}>
-              <div className={"flex items-center gap-x-1 text-slate-500"}>
-                <IconBadge size={"sm"} icon={BookOpen}/>
+            <div className={"flex items-center gap-x-1 text-black"}>
+                <IconBadge className={"fill-neutral-900"} size={"sm"} icon={BookOpen} variant={'default'}/>
                 <span>
                   {chaptersLength} {chaptersLength === 1 ? "Chapter" : "Chapters"}
                 </span>
@@ -67,6 +66,5 @@ export const CourseCard = (
             )}
           </div>
         </div>
-      </Link>
   )
 }

@@ -6,7 +6,7 @@ import Particles from "@/components/magicui/particles";
 import WordRotate from "@/components/magicui/word-rotate";
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import Link from "next/link";
-import {Logo} from "@/app/(dashboard)/home/_components/logo";
+
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import DotPattern from "@/components/magicui/dot-pattern";
@@ -18,6 +18,7 @@ import {BorderBeam} from "@/components/magicui/border-beam";
 import {BellIcon, CalendarIcon, DollarSign, GlobeIcon} from "lucide-react";
 import {BentoCard, BentoGrid} from "@/components/magicui/bento-grid";
 import {InputIcon} from "@radix-ui/react-icons";
+import {Logo} from "@/app/(dashboard)/dashboard/_components/logo";
 
 const features = [
   {
@@ -91,7 +92,7 @@ const Page = () => {
           <div className={"flex flex-col gap-y-8"}>
             <SparklesText
                 text={"Akmp Academy"}
-                className={"pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-indigo-800 to-indigo-500/80 text-8xl bg-clip-text leading-none text-transparent dark:from-white dark:to-slate-900/10"}/>
+                className={"pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-indigo-800 to-indigo-500/80 text-8xl bg-clip-text leading-none text-transparent"}/>
             <WordRotate
                 className="text-center text-4xl font-[600] tracking-tighter text-gray-800"
                 duration={4000}

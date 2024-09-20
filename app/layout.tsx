@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
+import {Inter, Lora, Montserrat_Subrayada, Roboto} from "next/font/google";
 import {ClerkProvider} from "@clerk/nextjs";
 import "./globals.css";
 import ToastProvider from "@/components/provider/provider-toast";
@@ -7,6 +7,8 @@ import React from "react";
 import {ConfettiProvider} from "@/components/provider/confetti-provider";
 
 const inter = Inter({subsets: ["latin"]});
+const lora = Lora({subsets: ["latin"]})
+const roboto = Roboto({weight: "400", subsets: ["latin"]})
 
 export const metadata: Metadata = {
   title: "Akmp Academy",

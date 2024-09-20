@@ -2,8 +2,9 @@ import {Chapter, Course, UserProgress} from "@prisma/client";
 import {auth} from "@clerk/nextjs/server";
 import {redirect} from "next/navigation";
 import {db} from "@/lib/db";
-import {CourseSidebarItem} from "@/app/(course)/courses/[courseId]/_components/course-sidebar-item";
 import {CourseProgress} from "@/components/course-progress";
+import Image from "next/image";
+import {CourseSidebarRoutes} from "@/app/(course)/courses/[courseId]/_components/course-sidebar-routes";
 
 interface CourseSidebarProps {
   course: Course & {
@@ -29,31 +30,29 @@ export const CourseSidebar = async ({course, progressCount}: CourseSidebarProps)
   })
 
   return (
-      <div className={"h-full border-r flex flex-col overflow-y-auto shadow-sm"}>
+      <div className={"h-full border-r flex flex-col overflow-y-auto shadow-2xl"}>
+        <div className={"relative h-48 w-full bg-black"}>
+          <Image
+              src={course.imageUrl!}
+              alt={course.title}
+              fill
+          />
+        </div>
         <div className={"p-8 flex flex-col border-b"}>
-          <h1 className={"font-semibold"}>
+          <h1 className={"text-xl font-semibold break-words"}>
             {course.title}
           </h1>
           {purchase && (
-              <div className={"mt-10"}>
+              <div className={"mt-4"}>
                 <CourseProgress
-                    variant={"success"}
+                    variant={"default"}
                     value={progressCount}
                 />
               </div>
           )}
         </div>
         <div className={"flex flex-col w-full"}>
-          {course.chapters.map(chapter => (
-              <CourseSidebarItem
-                  key={chapter.id}
-                  id={chapter.id}
-                  label={chapter.title}
-                  isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-                  courseId={course.id}
-                  isLocked={!chapter.isFree && !purchase}
-              />
-          ))}
+          <CourseSidebarRoutes courseId={course.id} />
         </div>
       </div>
   )

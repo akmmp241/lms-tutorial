@@ -11,7 +11,7 @@ const progressVariant = cva(
     {
       variants: {
         variant: {
-          default: "bg-sky-600",
+          default: "bg-pink-600",
           success: "bg-emerald-700"
         }
       },
@@ -34,13 +34,13 @@ const Progress = React.forwardRef<
   <ProgressPrimitive.Root
     ref={ref}
     className={cn(
-      "relative h-4 w-full overflow-hidden rounded-full bg-secondary",
+      "relative h-4 w-full overflow-hidden rounded-full bg-neutral-300",
       className
     )}
     {...props}
   >
     <ProgressPrimitive.Indicator
-      className={cn(progressVariant({variant: variant}))}
+      className={cn(progressVariant({variant: variant}), "rounded-xl")}
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
     />
   </ProgressPrimitive.Root>

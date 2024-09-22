@@ -46,13 +46,14 @@ export const CourseSidebar = async ({course, progressCount}: CourseSidebarProps)
               <div className={"mt-4"}>
                 <CourseProgress
                     variant={"default"}
+                    size={"big"}
                     value={progressCount}
                 />
               </div>
           )}
         </div>
         <div className={"flex flex-col w-full"}>
-          <CourseSidebarRoutes courseId={course.id} />
+          <CourseSidebarRoutes purchase={purchase} course={course} courseId={course.id} />
         </div>
       </div>
   )

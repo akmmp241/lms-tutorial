@@ -4,17 +4,18 @@ import {cn} from "@/lib/utils";
 interface CourseProgressProps {
   value: number
   variant?: "default" | "success"
-  size?: "default" | "sm"
+  size?: "default" | "sm" | "big"
 }
 
 const colorByVariant = {
-  default: "text-sky-700",
+  default: "text-black",
   success: "text-emerald-700"
 }
 
 const sizeByVariant = {
   default: "text-sm",
-  success: "text-xs"
+  sm: "text-xs",
+  big: "text-lg",
 }
 
 export const CourseProgress = ({
@@ -30,11 +31,9 @@ export const CourseProgress = ({
             variant={variant}
           />
         <p className={cn(
-            "font-medium mt-2 text-sky-700",
-            colorByVariant[variant || "default"],
-            sizeByVariant[variant || "default"]
+            "mt-2 text-sm text-black text-center",
         )}>
-          {Math.round(value)}% Complete
+          <span className={"text-lg font-[600]"}>{Math.round(value)}%</span> COMPLETE
         </p>
       </div>
   )

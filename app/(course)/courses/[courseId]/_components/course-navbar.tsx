@@ -19,9 +19,11 @@ export const CourseNavbar = (
     }: CourseNavbarProps) => {
 
   const nextChapter = course.chapters.filter(chapter => !chapter?.userProgress![0]?.isCompleted)[0];
-  const previous = course.chapters.filter(chapter => chapter?.userProgress![0]?.isCompleted);
-  const previousChapter = previous.length < 1 ? null : previous[previous.length - 1].id
 
+  const previous = course.chapters.filter(chapter => chapter?.userProgress![0]?.isCompleted);
+  const previousChapter = previous.length < 1 ?
+      "" : previous[previous.length - 1].userProgress[0].isCompleted ?
+          previous[previous.length - 2].id : previous[previous.length - 1].id;
 
   return (
       <>

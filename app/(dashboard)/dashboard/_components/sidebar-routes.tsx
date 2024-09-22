@@ -8,12 +8,12 @@ const guestRoutes = [
   {
     icon: Layout,
     label: "Dashboard",
-    href: "/home"
+    href: "/dashboard"
   },
   {
     icon: Compass,
     label: "Browse",
-    href: "/home/search"
+    href: "/dashboard/search"
   }
 ]
 
@@ -21,12 +21,12 @@ const teacherRoutes = [
   {
     icon: List,
     label: "Courses",
-    href: "/home/teacher/courses"
+    href: "/dashboard/teacher/courses"
   },
   {
     icon: BarChart,
     label: "Analytics",
-    href: "/home/teacher/analytics"
+    href: "/dashboard/teacher/analytics"
   }
 ]
 

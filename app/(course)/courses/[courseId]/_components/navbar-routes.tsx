@@ -2,29 +2,40 @@
 
 import React from 'react';
 import {useAuth, UserButton} from "@clerk/nextjs";
-import {usePathname} from "next/navigation";
+import {redirect, usePathname, useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {ArrowRight, ChevronLeft, ChevronRight, Home, LogOut} from "lucide-react";
 import Link from "next/link";
 import {SearchInput} from "@/components/search-input";
 import {isTeacher} from "@/lib/teacher";
 import {Chapter, Course, UserProgress} from "@prisma/client";
+import path from "node:path";
+import {getChapter} from "@/actions/get-chapter";
 
 interface NavbarRoutesProps {
   nextChapterId: string
-  previousChapterId: string | null
+  previousChapterId: string
   courseId: string;
 }
 
 const NavbarRoutes = ({nextChapterId, previousChapterId, courseId}: NavbarRoutesProps) => {
   const {userId} = useAuth()
   const pathname = usePathname()
+  const router = useRouter()
+
+  if (!userId) redirect('/dashboard')
 
   const isCoursePage = pathname?.includes('/courses')
   const isChapterPage = pathname?.includes("/chapter")
+  let isNextDisabled = false
+  let isPreviousDisabled = false
 
-  // const previous = course.chapters.filter(chapter => chapter?.userProgress![0].isCompleted);
-  // const previousChapter = previous[previous.length - 1]
+  if (isChapterPage) {
+    const path = pathname.split("/")
+    isNextDisabled = isChapterPage && nextChapterId === path[path.length - 1]
+    isPreviousDisabled = isChapterPage && previousChapterId === path[path.length - 1]
+    console.info(previousChapterId)
+  }
 
   return (
       <>
@@ -44,20 +55,26 @@ const NavbarRoutes = ({nextChapterId, previousChapterId, courseId}: NavbarRoutes
                 </Link>
                 <div className={"flex gap-x-4"}>
                   {previousChapterId && (
-                      <Link href={`/courses/${courseId}/chapters/${previousChapterId}`}>
-                        <Button>
-                          <ChevronLeft />
-                          Previous
-                        </Button>
-                      </Link>
+                      <Button
+                          className={"bg-transparent border border-violet-500 hover:bg-violet-800"}
+                          disabled={isPreviousDisabled}>
+                        <Link className={"flex items-center gap-x-2 font-bold tracking-wider"}
+                              href={`/courses/${courseId}/chapters/${previousChapterId}`}>
+                          <ChevronLeft/>
+                          Previous Chapter
+                        </Link>
+                      </Button>
                   )}
                   {nextChapterId && (
-                      <Link href={`/courses/${courseId}/chapters/${nextChapterId}`}>
-                        <Button>
-                          Continue
-                          <ChevronRight />
-                        </Button>
-                      </Link>
+                      <Button
+                          className={"bg-pink-600 hover:bg-pink-900 border border-pink-900"}
+                          disabled={isNextDisabled}>
+                        <Link className={"flex items-center gap-x-2 font-bold tracking-wider"}
+                            href={`/courses/${courseId}/chapters/${nextChapterId}`}>
+                          Continue Chapter
+                          <ChevronRight/>
+                        </Link>
+                      </Button>
                   )}
                 </div>
               </>

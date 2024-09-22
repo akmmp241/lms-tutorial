@@ -7,6 +7,7 @@ import {useConfettiStore} from "@/hooks/use-confetti-store";
 import {useState} from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import {cn} from "@/lib/utils";
 
 interface CourseProgressButtonProps {
   chapterId: string
@@ -52,9 +53,12 @@ export const CourseProgressButton = ({
           onClick={onClick}
           disabled={isLoading}
           type={"button"}
-          variant={isCompleted ? "outline" : "success"}
-          className={"w-full md:w-auto"}>
-        {isCompleted ? "Not Completed" : "Mark as Completed"}
+          className={cn(
+              "w-full md:w-auto border bg-pink-600 hover:bg-pink-900 border-pink-900",
+          )}>
+        <span className={"flex items-center gap-x-2 font-bold tracking-wider"}>
+          {isCompleted ? "Not Completed" : "Mark as Completed"}
+        </span>
         <Icon className={"h-4 w-4 ml-2"}/>
       </Button>
   )

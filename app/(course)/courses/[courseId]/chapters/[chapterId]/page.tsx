@@ -10,7 +10,7 @@ import {
 import {Separator} from "@/components/ui/separator";
 import {Preview} from "@/components/preview";
 import Link from "next/link";
-import {File} from "lucide-react";
+import {File, VideoIcon} from "lucide-react";
 import {
   CourseProgressButton
 } from "@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/course-progress-button";
@@ -33,12 +33,12 @@ const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: 
 
   return (
       <div>
-        {data.userProgress?.isCompleted && (
-            <Banner
-                variant={"success"}
-                label={"You already completed this chapter."}
-            />
-        )}
+        {/*{data.userProgress?.isCompleted && (*/}
+        {/*    <Banner*/}
+        {/*        variant={"pink"}*/}
+        {/*        label={"You already completed this chapter."}*/}
+        {/*    />*/}
+        {/*)}*/}
         {isLocked && (
             <Banner
                 variant={"warning"}
@@ -46,6 +46,10 @@ const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: 
             />
         )}
         <div className={"flex flex-col w-full mx-auto pb-20"}>
+          <div className={"flex items-center gap-x-4 p-4 text-xl font-[600]"}>
+            <VideoIcon />
+            <span>{data.chapter.position + 1} - {data.chapter.title}</span>
+          </div>
           <div className={"p-4"}>
             <VideoPlayer
                 chapterId={params.chapterId}
@@ -58,10 +62,7 @@ const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: 
             />
           </div>
           <div>
-            <div className={"p-4 flex flex-col md:flex-row items-center justify-between"}>
-              <h2 className={"text-2xl font-semibold mb-2"}>
-                {data.chapter.title}
-              </h2>
+            <div className={"p-4 flex flex-col md:flex-row items-center justify-center"}>
               {data.purchase ? (
                   <CourseProgressButton
                       chapterId={params.chapterId}
@@ -77,7 +78,7 @@ const ChapterIdPage = async ({params}: { params: { courseId: string, chapterId: 
               )}
             </div>
             <Separator/>
-            <div>
+            <div className={"text-2xl"}>
               <Preview
                   value={data.chapter.description!}/>
             </div>
